@@ -1,4 +1,8 @@
 // For purposes of published npm package
-export * from './components/AssetView/AssetView';
-export * from './components/TenantSelector/TenantSelector';
-export * from './components/EventPreview/EventPreview';
+export { default as AssetView } from './components/AssetView/AssetView';
+export {
+  default as TenantSelector,
+} from './components/TenantSelector/TenantSelector';
+export {
+  default as EventPreview,
+} from './components/EventPreview/EventPreview';

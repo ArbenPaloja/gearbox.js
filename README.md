@@ -7,6 +7,19 @@ Gearbox.js
 [![Build Status](https://travis-ci.org/cognitedata/gearbox.js.svg?branch=master)](https://travis-ci.org/cognitedata/gearbox.js)
 [![codecov](https://codecov.io/gh/cognitedata/gearbox.js/branch/master/graph/badge.svg)](https://codecov.io/gh/cognitedata/gearbox.js)
 
+## Installation
+cd ge
+Install the package with npm:
+```
+$ npm install @cognite/gearbox --save
+```
+
+or with yarn
+```
+$ yarn add @cognite/gearbox
+```
+
+
 ## Setup
 
 Run `yarn`
