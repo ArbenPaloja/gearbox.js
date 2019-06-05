@@ -2,12 +2,9 @@ import {
   Asset,
   Assets,
   Event,
-  Events,
   File,
-  Files,
   Revision,
   ThreeD,
-  TimeSeries,
   Timeseries,
 } from '@cognite/sdk';
 import { ApiAssetList } from '../interfaces';
@@ -39,8 +36,8 @@ export function fetch3DModelRevision(
   return ThreeD.retrieveRevision(modelId, revisionId);
 }
 
-export async function retrieveAsset(assetId: number) {
-  return await Assets.retrieve(assetId);
+export async function retrieveAsset(sdkInstance: any, assetId: number) {
+  return await sdkInstance.Assets.retrieve(assetId);
 }
 
 export async function getAssetListDescendants(
@@ -56,11 +53,14 @@ export async function getAssetListDescendants(
   return response.items;
 }
 
-export async function getAssetEvent(query: {
-  assetId: number;
-  limit: number;
-}): Promise<Event[]> {
-  const response = await Events.list(query);
+export async function getAssetEvent(
+  sdkInstance: any,
+  query: {
+    assetId: number;
+    limit: number;
+  }
+): Promise<Event[]> {
+  const response = await sdkInstance.Events.list(query);
 
   if (response.items && response.items.length > 0) {
     return response.items;
@@ -69,18 +69,24 @@ export async function getAssetEvent(query: {
   return [];
 }
 
-export async function getAssetFiles(query: {
-  assetId: number;
-  limit: number;
-}): Promise<File[]> {
-  const response = await Files.list(query);
+export async function getAssetFiles(
+  sdkInstance: any,
+  query: {
+    assetId: number;
+    limit: number;
+  }
+): Promise<File[]> {
+  const response = await sdkInstance.Files.list(query);
   return response.items;
 }
 
-export async function getAssetTimeseries(query: {
-  assetId: number;
-  limit: number;
-}): Promise<Timeseries[]> {
-  const response = await TimeSeries.list(query);
+export async function getAssetTimeseries(
+  sdkInstance: any,
+  query: {
+    assetId: number;
+    limit: number;
+  }
+): Promise<Timeseries[]> {
+  const response = await sdkInstance.TimeSeries.list(query);
   return response.items;
 }

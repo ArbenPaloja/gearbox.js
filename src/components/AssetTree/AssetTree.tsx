@@ -1,5 +1,4 @@
 import { Asset, AssetListDescendantsParams } from '@cognite/sdk';
-import * as sdk from '@cognite/sdk';
 import { Tree } from 'antd';
 import { AntTreeNode } from 'antd/lib/tree';
 import React, { Component } from 'react';
@@ -25,15 +24,18 @@ interface AssetTreeState {
 const cursorApiRequest = async (
   assetId: number,
   params: AssetListDescendantsParams,
-  data: Asset[] = []
+  data: Asset[] = [],
+  sdkInstance: any
 ): Promise<Asset[]> => {
-  const result = await sdk.Assets.listDescendants(assetId, params);
+  const result = await sdkInstance.Assets.listDescendants(assetId, params);
   const { nextCursor: cursor } = result;
   if (result.nextCursor) {
-    return cursorApiRequest(assetId, { ...params, cursor }, [
-      ...data,
-      ...result.items,
-    ]);
+    return cursorApiRequest(
+      assetId,
+      { ...params, cursor },
+      [...data, ...result.items],
+      sdkInstance
+    );
   }
   return [...data, ...result.items];
 };
@@ -98,7 +100,8 @@ export class AssetTree extends Component<AssetTreeProps, AssetTreeState> {
   }
 
   async componentDidMount() {
-    const assets = await sdk.Assets.list({ depth: 1 });
+    const { sdkInstance } = this.props;
+    const assets = await sdkInstance.Assets.list({ depth: 1 });
     this.setState({
       assets: assets.items,
       treeData:
@@ -109,6 +112,8 @@ export class AssetTree extends Component<AssetTreeProps, AssetTreeState> {
   }
 
   onLoadData = async (treeNode: AntTreeNode) => {
+    const { sdkInstance } = this.props;
+
     if (treeNode.props.children) {
       return;
     }
@@ -121,7 +126,12 @@ export class AssetTree extends Component<AssetTreeProps, AssetTreeState> {
         limit: 1000,
       };
 
-      const loadedData = await cursorApiRequest(assetId, query);
+      const loadedData = await cursorApiRequest(
+        assetId,
+        query,
+        [],
+        sdkInstance
+      );
       if (loadedData.length > 1) {
         treeNode.props.dataRef.children = loadedData
           .slice(1)

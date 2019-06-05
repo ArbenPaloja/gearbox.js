@@ -1,4 +1,5 @@
 export * from './components/AssetMeta/AssetMeta';
+export * from './components/AssetMetaControlled/AssetMetaControlled';
 export { AssetScanner } from './components/AssetScanner/AssetScanner';
 export { AssetSearch } from './components/AssetSearch/AssetSearch';
 export * from './components/AssetTree/AssetTree';

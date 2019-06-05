@@ -33,6 +33,7 @@ export default [
       typescript({
         typescript: require('typescript'),
         exclude: ['**/*.(test|stories).ts+(|x)', '**/mocks/*.ts+(|x)'],
+        noResolve: true,
       }),
       json(),
     ],
@@ -58,6 +59,7 @@ export default [
       typescript({
         typescript: require('typescript'),
         exclude: ['**/*.(test|stories).ts+(|x)', '**/mocks/*.ts+(|x)'],
+        noResolve: true,
       }),
       json(),
     ],

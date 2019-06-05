@@ -48,7 +48,7 @@ export interface AssetMetaStyles {
   events?: AssetEventsPanelStyles;
 }
 
-interface AssetMetaProps {
+export interface AssetMetaProps {
   assetId: number;
   tab?: string;
   docsProps?: MetaDocProps;
@@ -57,6 +57,7 @@ interface AssetMetaProps {
   hidePanels?: AssetPanelType[];
   onPaneChange?: (key: string) => void;
   styles?: AssetMetaStyles;
+  sdkInstance: any;
 }
 
 interface AssetMetaState {
@@ -109,7 +110,7 @@ export class AssetMeta extends React.Component<AssetMetaProps, AssetMetaState>
   }
 
   loadAll = async (assetId: number) => {
-    const { eventProps, docsProps, timeseriesProps } = this.props;
+    const { eventProps, docsProps, timeseriesProps, sdkInstance } = this.props;
     const query = { assetId, limit: 1000 };
 
     const promises: [
@@ -118,15 +119,15 @@ export class AssetMeta extends React.Component<AssetMetaProps, AssetMetaState>
       Promise<File[]> | Promise<null>,
       Promise<Timeseries[]> | Promise<null>
     ] = [
-      retrieveAsset(assetId),
+      retrieveAsset(sdkInstance, assetId),
       this.includesPanel('events')
-        ? getAssetEvent(query)
+        ? getAssetEvent(sdkInstance, query)
         : Promise.resolve(null),
       this.includesPanel('documents')
-        ? getAssetFiles(query)
+        ? getAssetFiles(sdkInstance, query)
         : Promise.resolve(null),
       this.includesPanel('timeseries')
-        ? getAssetTimeseries(query)
+        ? getAssetTimeseries(sdkInstance, query)
         : Promise.resolve(null),
     ];
 

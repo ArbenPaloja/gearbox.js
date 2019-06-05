@@ -68,6 +68,7 @@ export interface OnSelectAssetTreeParams {
 }
 
 export interface AssetTreeProps {
+  sdkInstance: any;
   onSelect?: (onSelect: OnSelectAssetTreeParams) => void;
   defaultExpandedKeys?: number[];
 }
