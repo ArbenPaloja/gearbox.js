@@ -125,7 +125,7 @@ class AssetTree extends React.Component<AssetTreeProps, AssetTreeState> {
     if (!this.context) {
       console.error(ERROR_NO_SDK_CLIENT);
       return;
-    }   
+    }  
     const assets = await this.context.assets
       .list({ filter: { root: true } })
       .autoPagingToArray(this.autoPagingToArrayOptions);
