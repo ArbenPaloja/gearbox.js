@@ -107,6 +107,8 @@ class AssetTree extends React.Component<AssetTreeProps, AssetTreeState> {
     };
   }
 
+  //here we will add displayName function.
+
   async componentDidMount() {
     if (!this.context) {
       console.error(ERROR_NO_SDK_CLIENT);
