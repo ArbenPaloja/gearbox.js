@@ -76,7 +76,7 @@ class AssetTree extends React.Component<AssetTreeProps, AssetTreeState> {
       return nodes[id];
     });
   }
-//return root assets --> b1
+//return root assets --> change at gitHub owner!
   static returnPretty(asset: Asset) {
     return {
       title: `${asset.name}: ${asset.description}`,
