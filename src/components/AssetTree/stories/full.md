@@ -17,7 +17,7 @@ import React from 'react';
 import { AssetTree } from '@cognite/gearbox';
 
 function ExampleComponent(props) {
-
+//return assets --> b2
   return (
     <AssetTree />
   );

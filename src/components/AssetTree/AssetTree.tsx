@@ -52,7 +52,7 @@ class AssetTree extends React.Component<AssetTreeProps, AssetTreeState> {
     });
 
     const addedAsChildren: (number | string)[] = [];
-
+    //loops inside assets --> b1
     assets.forEach(asset => {
       const { parentId } = asset;
       const node = nodes[parentId as number]; // casting is not a problem. It will return undefined if not found
@@ -76,7 +76,7 @@ class AssetTree extends React.Component<AssetTreeProps, AssetTreeState> {
       return nodes[id];
     });
   }
-
+//return root assets --> b1
   static returnPretty(asset: Asset) {
     return {
       title: `${asset.name}: ${asset.description}`,
